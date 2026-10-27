@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bambino felice · propozycje strony</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+  :root { --accent: #E07B39; --ease: cubic-bezier(0.16, 1, 0.3, 1); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 400 16px/1.6 Inter, system-ui, sans-serif; background: #f6f5f2; color: #1c1917; padding: clamp(24px, 5vw, 64px) 16px 48px; }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  header { margin-bottom: 40px; }
+  .eyebrow { font-size: 13px; letter-spacing: .15em; text-transform: uppercase; color: #78716c; margin-bottom: 12px; }
+  h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .lead { color: #57534e; max-width: 60ch; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .tile { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 30px rgba(0,0,0,.06); transition: transform .7s var(--ease), box-shadow .7s var(--ease); display: block; color: inherit; text-decoration: none; }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(0,0,0,.06), 0 20px 50px rgba(0,0,0,.12); }
+  .shot { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #e7e5e4; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .shot .m { position: absolute; right: 10px; bottom: -18%; width: 26%; aspect-ratio: 390/844; border-radius: 10px; overflow: hidden; border: 3px solid #111; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+  .shot .m img { height: 100%; }
+  .meta { padding: 18px 20px 22px; }
+  .meta h2 { font-size: 18px; margin-bottom: 4px; }
+  .meta p { color: #78716c; font-size: 14px; }
+  .meta .go { margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent); }
+  .cta { margin-top: 48px; background: #1c1917; color: #fff; border-radius: 22px; padding: clamp(28px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+  .cta h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.2; }
+  .cta p { color: #a8a29e; margin-top: 6px; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { padding: 14px 24px; border-radius: 999px; font-weight: 600; text-decoration: none; }
+  .btn.primary { background: var(--accent); color: #111; }
+  .btn.ghost { border: 1px solid #57534e; color: #fff; }
+  footer { margin-top: 32px; font-size: 13px; color: #a8a29e; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Propozycje strony · Bambino felice</p>
+    <h1>4 pomysły na stronę Bambino felice</h1>
+    <p class="lead">Kliknij wariant, żeby go przejrzeć. Najlepiej na telefonie, bo tam szuka Państwa większość rodziców. To szkice: kolory, teksty i zdjęcia dopasujemy do Państwa.</p>
+  </header>
+
+  <div class="grid">
+    <a class="tile" href="minimal/"><div class="shot"><img src="thumbs/minimal-desktop.png" alt="Wariant Czysty"><div class="m"><img src="thumbs/minimal-mobile.png" alt=""></div></div><div class="meta"><h2>Czysty</h2><p>Spokojny, elegancki, dużo przestrzeni.</p><p class="go">Zobacz →</p></div></a>
+    <a class="tile" href="lokalny/"><div class="shot"><img src="thumbs/lokalny-desktop.png" alt="Wariant Lokalny"><div class="m"><img src="thumbs/lokalny-mobile.png" alt=""></div></div><div class="meta"><h2>Lokalny</h2><p>Ciepły, zdjęcia i opinie na pierwszym planie.</p><p class="go">Zobacz →</p></div></a>
+    <a class="tile" href="odwazny/"><div class="shot"><img src="thumbs/odwazny-desktop.png" alt="Wariant Odważny"><div class="m"><img src="thumbs/odwazny-mobile.png" alt=""></div></div><div class="meta"><h2>Odważny</h2><p>Nowoczesny, kontrastowy, wyróżnia się.</p><p class="go">Zobacz →</p></div></a>
+    <a class="tile" href="kinowy/"><div class="shot"><img src="thumbs/kinowy-desktop.png" alt="Wariant Kinowy"><div class="m"><img src="thumbs/kinowy-mobile.png" alt=""></div></div><div class="meta"><h2>Kinowy</h2><p>Premium z płynnymi animacjami. Przewiń powoli.</p><p class="go">Zobacz →</p></div></a>
+  </div>
+
+  <div class="cta">
+    <div><h2>Któryś się podoba?</h2><p>Proszę dać znać, który wariant, a przygotuję szczegóły.</p></div>
+    <div class="btns">
+      <a class="btn primary" href="mailto:maticzech@icloud.com?subject=Strona%20dla%20Bambino%20felice">Chcę taką stronę</a>
+      <a class="btn ghost" href="tel:+48883996070">Zadzwoń</a>
+    </div>
+  </div>
+
+  <footer>Projekt koncepcyjny przygotowany przez Mateusza Czechowskiego dla Bambino felice. Nie jest to oficjalna strona firmy.</footer>
+</div>
+</body>
+</html>
