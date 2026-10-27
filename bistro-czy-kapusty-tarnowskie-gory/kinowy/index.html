@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bistro Czy Kapusty…? · restauracja przy Rynku w Tarnowskich Górach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070a;
+    --bg-2: #0e0e13;
+    --fg: #f4f1ea;
+    --muted: #a19d94;
+    --accent: #e0534a;          /* kolor marki */
+    --accent-rgb: 224, 83, 74; /* ten sam kolor jako r,g,b — czyta go canvas */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: clip; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  body { background: var(--bg); color: var(--fg); font: 400 17px/1.6 Inter, system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; overflow-wrap: break-word; hyphens: auto; }
+  p, dd { overflow-wrap: break-word; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  #dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  main, nav, footer { position: relative; z-index: 1; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 20px clamp(16px, 4vw, 48px); background: linear-gradient(var(--bg), transparent); }
+  nav .logo { font-family: Fraunces, serif; font-size: 22px; }
+  nav .links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
+  nav .links a:hover { color: var(--fg); }
+  .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--accent); color: #111; font-weight: 600; font-size: 15px; transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(var(--accent-rgb), .35); }
+  .btn-ghost { background: transparent; color: var(--fg); border: 1px solid rgba(255,255,255,.2); }
+
+  section { padding: clamp(80px, 14vh, 160px) clamp(16px, 6vw, 96px); }
+  .eyebrow { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .lead { color: var(--muted); max-width: 52ch; font-size: clamp(17px, 1.4vw, 20px); }
+
+  #hero { position: relative; background: linear-gradient(90deg, rgba(7,7,10,.96) 30%, rgba(7,7,10,.55)), url("https://images.unsplash.com/photo-1777803243891-0d6f36e50446?w=1800&q=75&auto=format&fit=crop") center/cover; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+  #hero h1 { font-size: clamp(48px, 9vw, 140px); max-width: 14ch; }
+  #hero h1 .w { display: inline-block; }
+  #hero .lead { margin: 28px 0 40px; }
+  #hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Usługi: domyślnie siatka; klasa .is-pinned (dodawana przez JS) zamienia w scenę 3D */
+  #uslugi h2 { font-size: clamp(36px, 5vw, 72px); margin-bottom: 48px; }
+  .stage { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .card { background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 36px; backdrop-filter: blur(6px); }
+  .card .num { font-family: Fraunces, serif; color: var(--accent); font-size: 15px; margin-bottom: 18px; }
+  .card h3 { font-size: clamp(26px, 3vw, 40px); margin-bottom: 14px; }
+  .card p { color: var(--muted); }
+  .card .price { margin-top: 20px; font-weight: 600; color: var(--fg); }
+  #uslugi.is-pinned { height: 100svh; padding-top: 110px; padding-bottom: 40px; display: flex; flex-direction: column; }
+  #uslugi.is-pinned h2 { margin-bottom: 24px; }
+  #uslugi.is-pinned .stage { position: relative; flex: 1; display: block; perspective: 1400px; }
+  #uslugi.is-pinned .card { position: absolute; left: 0; right: 0; top: 50%; margin: 0 auto; max-width: 620px; transform-style: preserve-3d; will-change: transform, opacity, filter; translate: 0 -50%; }
+
+  #o-nas { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  #o-nas h2 { font-size: clamp(36px, 5vw, 72px); margin-bottom: 24px; }
+  #o-nas .img-wrap { border-radius: 28px; overflow: hidden; aspect-ratio: 4/5; }
+  #o-nas .img-wrap img { width: 100%; height: 120%; object-fit: cover; }
+
+  #galeria h2 { font-size: clamp(36px, 5vw, 72px); margin-bottom: 40px; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery figure { border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; }
+  .gallery figure:nth-child(3n+2) { margin-top: 60px; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .gallery figure:hover img { transform: scale(1.06); }
+
+  #opinie blockquote { font-family: Fraunces, serif; font-size: clamp(26px, 3.4vw, 48px); max-width: 26ch; margin-bottom: 18px; }
+  #opinie cite { color: var(--muted); font-style: normal; }
+  .quotes { display: grid; gap: 80px; }
+
+  #kontakt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  #kontakt h2 { font-size: clamp(40px, 6vw, 96px); margin-bottom: 32px; }
+  #kontakt dl { display: grid; gap: 18px; }
+  #kontakt dt { color: var(--muted); font-size: 13px; letter-spacing: .15em; text-transform: uppercase; }
+  #kontakt dd { font-size: 20px; }
+  #kontakt iframe { width: 100%; height: 100%; min-height: 360px; border: 0; border-radius: 24px; filter: grayscale(1) invert(.92) contrast(.9); }
+
+  footer { padding: 40px clamp(16px, 6vw, 96px); color: var(--muted); font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+
+  @media (max-width: 767px) {
+    nav .links { display: none; }
+    #o-nas, #kontakt { grid-template-columns: minmax(0, 1fr); }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery figure:nth-child(3n+2) { margin-top: 0; }
+    .gallery figure:nth-child(2n) { margin-top: 40px; }
+    .card { padding: 26px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<nav>
+  <a href="#hero" class="logo">Czy Kapusty…?</a>
+  <div class="links"><a href="#uslugi">Karta</a><a href="#o-nas">O nas</a><a href="#galeria">Galeria</a><a href="#opinie">Opinie</a><a href="#kontakt">Kontakt</a></div>
+  <a href="tel:+48694287290" class="btn">Zadzwoń</a>
+</nav>
+
+<main>
+  <section id="hero">
+    <p class="eyebrow" data-reveal>Bistro · Tarnowskie Góry, przy Rynku</p>
+    <h1 data-split>Śląski obiad podany w&nbsp;główce kapusty</h1>
+    <p class="lead" data-reveal>Tatar, rosół z kaczki, rolada z kluskami i nasze trzy kapusty: dania znane z Kuchennych Rewolucji, w porcjach, po których nie trzeba kolacji.</p>
+    <div class="ctas" data-reveal><a href="tel:+48694287290" class="btn">Zarezerwuj stolik</a><a href="#uslugi" class="btn btn-ghost">Zobacz kartę</a></div>
+    <p data-reveal style="margin-top:36px;color:var(--muted);font-size:15px">★ 4,6 · 883 opinie Google · Kuchenne Rewolucje, TVN 2024</p>
+  </section>
+
+  <section id="uslugi">
+    <p class="eyebrow" data-reveal>Karta</p>
+    <h2 data-reveal>Co warto zamówić</h2>
+    <div class="stage">
+      <article class="card"><p class="num">01</p><h3>Trzy kapusty w główce kapusty</h3><p>Biała z bigosem, żeberkiem i schabowym na smalcu, czerwona z piersią z kaczki albo włoska z pieczarkami. Podajemy w wydrążonej główce kapusty.</p><p class="price">od 36 zł</p></article>
+      <article class="card"><p class="num">02</p><h3>Tatar wołowy</h3><p>Z żółtkiem, kiszonym ogórkiem, cebulą, marynowanym borowikiem i musztardą dijon, do tego pieczywo i masło.</p><p class="price">38 zł</p></article>
+      <article class="card"><p class="num">03</p><h3>Rosół z kaczki i wołowiny</h3><p>Z lanym ciastem z majerankiem i pieczonym jabłkiem. Na chłodny dzień w Tarnowskich Górach jak znalazł.</p><p class="price">25 zł</p></article>
+      <article class="card"><p class="num">04</p><h3>Rolada śląska z kluskami</h3><p>Mięciutka rolada wołowa, kluski śląskie i sos, jak w niedzielę u babci.</p><p class="price">[cena od … zł]</p></article>
+      <article class="card"><p class="num">05</p><h3>Schabowy, żebro, placki</h3><p>Schabowy na pół talerza, żebro z pańczkrautem, placki ziemniaczane. Dla dzieci nuggetsy albo ryba.</p><p class="price">od 34 zł</p></article>
+    </div>
+  </section>
+
+  <section id="o-nas">
+    <div>
+      <p class="eyebrow" data-reveal>O nas</p>
+      <h2 data-reveal>Sylwia na sali, Sebastian w kuchni</h2>
+      <p class="lead" data-reveal>Bistro przy ul. ks. Lewka prowadzą Sylwia i Sebastian, oboje po szkole gastronomicznej. W 2024 roku lokal przeszedł Kuchenne Rewolucje i dostał nową nazwę od trzech dań z kapustą, które dziś są naszym znakiem rozpoznawczym. Jest jasno, ludowo i rodzinnie, a w ciepłe dni zapraszamy do zielonego ogródka.</p>
+    </div>
+    <div class="img-wrap"><img data-parallax src="https://images.unsplash.com/photo-1643856557143-09189e523fd6?w=1000&q=75&auto=format&fit=crop" alt="Zielony ogródek restauracji ze stolikami" loading="lazy"></div>
+  </section>
+
+  <section id="galeria">
+    <p class="eyebrow" data-reveal>Galeria</p>
+    <h2 data-reveal>Talerze, które się pamięta</h2>
+    <div class="gallery">
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1770210627300-d4fa9b75dbb7?w=800&q=75&auto=format&fit=crop" alt="Tatar wołowy z pieczywem" loading="lazy"></figure>
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1652860213441-6622f9fec77f?w=800&q=75&auto=format&fit=crop" alt="Kosz świeżych główek kapusty" loading="lazy"></figure>
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1760504526047-69dcd554e14a?w=800&q=75&auto=format&fit=crop" alt="Pieczona kaczka w sosie" loading="lazy"></figure>
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?w=800&q=75&auto=format&fit=crop" alt="Kotlet schabowy z ziemniakami" loading="lazy"></figure>
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1667986968266-20d2506922f5?w=800&q=75&auto=format&fit=crop" alt="Przekrojona czerwona kapusta" loading="lazy"></figure>
+      <figure data-reveal><img src="https://images.unsplash.com/photo-1783684522943-7ab49ce47d43?w=800&q=75&auto=format&fit=crop" alt="Placki ziemniaczane ze śmietaną" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section id="opinie">
+    <p class="eyebrow" data-reveal>Opinie</p>
+    <div class="quotes">
+      <p class="eyebrow" data-reveal style="margin-bottom:48px">★ 4,6 · 883 opinie Google</p>
+      <div data-reveal><blockquote>„Jedzenie przepyszne. Szczególnie tatar. […] Porcje ogromne, warto przyjść bardzo głodnym. Ceny dobre.”</blockquote><cite>Sławomir Iwańczak · Google</cite></div>
+      <div data-reveal><blockquote>„Właścicielka bistro, pani Sylwia, to niezwykle ciepła, elegancka i zawsze uśmiechnięta osoba – bije od niej tak cudowna energia i gościnność, że od samego progu każdy czuje się tutaj jak w domu.”</blockquote><cite>Agnieszka · Google</cite></div>
+      <div data-reveal><blockquote>„Wracając z Gliwic do Warszawy odbijamy do Tarnowskich Gór specjalnie na obiad.”</blockquote><cite>Paweł Stokowski · Google</cite></div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div>
+      <p class="eyebrow" data-reveal>Kontakt</p>
+      <h2 data-reveal>Wpadnijcie na obiad</h2>
+      <dl data-reveal>
+        <div><dt>Telefon</dt><dd><a href="tel:+48694287290">694 287 290</a></dd></div>
+        <div><dt>Adres</dt><dd>ul. ks. Michała Lewka 3, 42-600 Tarnowskie Góry</dd></div>
+        <div><dt>Godziny</dt><dd>wt–czw 12–21 · pt–sob 12–23 · nd 12–21<br>pon. nieczynne · kuchnia do 20 (pt–sob do 21)</dd></div>
+      </dl>
+    </div>
+    <iframe data-reveal src="https://maps.google.com/maps?q=ul.%20ks.%20Micha%C5%82a%20Lewka%203%2C%2042-600%20Tarnowskie%20G%C3%B3ry&output=embed" loading="lazy" title="Mapa dojazdu"></iframe>
+  </section>
+</main>
+
+<footer>Projekt koncepcyjny przygotowany przez Mateusz Czechowski dla Bistro Czy Kapusty…?. Nie jest to oficjalna strona firmy. Kontakt: maticzech@icloud.com</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EASE = t => 1 - Math.pow(1 - t, 4); // power4.out
+
+  // ---------- Pył (canvas) ----------
+  const canvas = document.getElementById('dust');
+  const ctx = canvas.getContext('2d');
+  const rgb = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim() || '212,175,55';
+  const sprite = document.createElement('canvas');
+  sprite.width = sprite.height = 64;
+  const sctx = sprite.getContext('2d');
+  const grad = sctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grad.addColorStop(0, `rgba(${rgb},1)`);
+  grad.addColorStop(0.2, `rgba(${rgb},0.55)`);
+  grad.addColorStop(1, `rgba(${rgb},0)`);
+  sctx.fillStyle = grad;
+  sctx.fillRect(0, 0, 64, 64);
+
+  let w, h, parts = [], raf = null;
+  const pointer = { x: -9999, y: -9999 };
+  const R = 130;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(150, (w * h) / 9000));
+    parts = Array.from({ length: n }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.15, vy: -(Math.random() * 0.25 + 0.05),
+      px: 0, py: 0,
+      r: Math.random() * 1.6 + 0.4, a: Math.random() * 0.6 + 0.2, t: Math.random() * 6.28
+    }));
+    if (reduce) draw(false);
+  }
+
+  function draw(move) {
+    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const p of parts) {
+      if (move) {
+        p.t += 0.01;
+        const dx = p.x - pointer.x, dy = p.y - pointer.y, d2 = dx * dx + dy * dy;
+        if (d2 < R * R) {
+          const d = Math.sqrt(d2) || 1, f = EASE(1 - d / R) * 1.4;
+          p.px += (dx / d) * f; p.py += (dy / d) * f;
+        }
+        p.px *= 0.9; p.py *= 0.9;
+        p.x += p.vx + Math.sin(p.t) * 0.12 + p.px;
+        p.y += p.vy + p.py;
+        if (p.y < -12) { p.y = h + 12; p.x = Math.random() * w; }
+        if (p.y > h + 12) p.y = -12;
+        if (p.x < -12) p.x = w + 12;
+        if (p.x > w + 12) p.x = -12;
+      }
+      const s = p.r * 9;
+      ctx.globalAlpha = p.a * (0.65 + 0.35 * Math.sin(p.t * 2));
+      ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function loop() { draw(true); raf = requestAnimationFrame(loop); }
+  addEventListener('resize', resize);
+  addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+  addEventListener('pointerleave', () => { pointer.x = pointer.y = -9999; });
+  addEventListener('touchend', () => { pointer.x = pointer.y = -9999; }, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (reduce) return;
+    if (document.hidden) { cancelAnimationFrame(raf); raf = null; } else if (!raf) loop();
+  });
+  resize();
+  if (!reduce) loop();
+
+  // ---------- Scroll i ruch ----------
+  if (reduce || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.defaults({ ease: 'power4.out', duration: 1.4 });
+
+  if (window.Lenis) {
+    const lenis = new Lenis({ duration: 1.2, easing: EASE, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -10 });
+    }));
+  }
+
+  // Nagłówek hero: słowa wyłaniają się z rozmycia
+  document.querySelectorAll('[data-split]').forEach(el => {
+    el.innerHTML = el.textContent.trim().split(/ +/).map(word => `<span class="w">${word}</span>`).join(' ');
+    gsap.fromTo(el.querySelectorAll('.w'),
+      { opacity: 0, y: 60, filter: 'blur(8px)' },
+      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.6, stagger: 0.08, delay: 0.2 });
+  });
+
+  const mm = gsap.matchMedia();
+  mm.add({ desk: '(min-width: 768px)', mob: '(max-width: 767px)' }, ctx => {
+    const { desk } = ctx.conditions;
+    const blur = desk ? 8 : 4;
+
+    gsap.utils.toArray('[data-reveal]').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 40, filter: `blur(${blur}px)` },
+        { opacity: 1, y: 0, filter: 'blur(0px)', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    });
+
+    gsap.utils.toArray('[data-parallax]').forEach(img => {
+      gsap.fromTo(img, { yPercent: -10 }, { yPercent: 0, ease: 'none',
+        scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+
+    // Usługi: przypięta scena, karty przechodzą w 3D jedna po drugiej
+    const section = document.getElementById('uslugi');
+    const cards = gsap.utils.toArray('#uslugi .card');
+    if (cards.length < 2) return;
+    section.classList.add('is-pinned');
+    const rot = desk ? 35 : 14, depth = desk ? 500 : 220;
+    const tl = gsap.timeline({
+      defaults: { ease: 'power4.out', duration: 1 },
+      scrollTrigger: { trigger: section, start: 'top top', end: () => '+=' + cards.length * (desk ? 650 : 480), pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true }
+    });
+    cards.forEach((card, i) => {
+      const at = i * 1.1;
+      if (i === 0) {
+        gsap.set(card, { opacity: 1 });
+      } else {
+        tl.fromTo(card,
+          { opacity: 0, rotateX: -rot, z: -depth, yPercent: 35, filter: `blur(${blur}px)` },
+          { opacity: 1, rotateX: 0, z: 0, yPercent: 0, filter: 'blur(0px)' }, at);
+      }
+      if (i < cards.length - 1) {
+        tl.to(card, { opacity: 0, rotateX: rot * 0.6, z: -depth * 0.6, yPercent: -30, filter: `blur(${blur}px)` }, at + 1.1);
+      }
+    });
+    gsap.set(cards.slice(1), { opacity: 0 });
+    return () => section.classList.remove('is-pinned');
+  });
+})();
+</script>
+</body>
+</html>
